@@ -45,6 +45,10 @@ coverage.xml
 # Rope
 .ropeproject
 
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
 # Django stuff:
 *.log
 *.pot
