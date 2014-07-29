@@ -5,3 +5,27 @@ from bookreview.models import (
     Book,
 )
 
+
+class BookSerializer(serializers.ModelSerializer):
+    """
+    Serializing all the books
+    """
+    search_url = serializers.SerializerMethodField('get_search_url')
+
+    class Meta:
+        model = Book
+        fields = ('id', 'title', 'isbn', 'search_url')
+
+    def get_search_url(self, obj):
+        return "http://www.isbnsearch.org/isbn/{}".format(obj.isbn)
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+    """
+    Serializing all the authors
+    """
+    books = BookSerializer(many=True)
+
+    class Meta:
+        model = Author
+        fields = ('id', 'first_name', 'last_name', 'books')

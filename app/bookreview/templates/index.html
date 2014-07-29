@@ -1,12 +1,41 @@
 {% load url from future %}
 
-<h2>Authors</h2>
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
-<ul>
-    {% for author in authors %}
-        <li>
-            <!-- this URL is built manually -->
-            <a href="/authors/{{author.id}}/">{{author.first_name}} {{author.last_name}}</a>
-        </li>
-    {% endfor %}
-</ul>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2><a href="{% url 'author-list' %}" title="View all authors">Authors</a></h2>
+
+        <form action="{% url 'author-list' %}" method="post" class="form-inline" role="form">
+            <div class="form-group">
+                <input type="text" name="first_name" class="form-control" placeholder="Your first name"/>
+            </div>
+            <div class="form-group">
+                <input type="text" name="last_name" class="form-control" placeholder="Your last name"/>
+            </div>
+            <input type="submit" value="Add Author" class="btn btn-default" />
+        </form>
+
+        <ul>
+            {% for author in authors %}
+                <li>
+                    <!-- this URL is built manually -->
+                    <a href="/authors/{{author.id}}/">{{author.first_name}} {{author.last_name}}</a>
+                    {# <a href="{% url 'author-instance' author.id %}">{{author.first_name}} {{author.last_name}}</a> #}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+
+
